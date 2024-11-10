@@ -1,6 +1,7 @@
 from django.db import models
+from django.utils import timezone
 import uuid
-import datetime
+
 
 class Books(models.Model):
     book_name = models.CharField(verbose_name='Book Name', max_length=128, unique=False, null=True, blank=True)
@@ -9,7 +10,8 @@ class Books(models.Model):
     book_content = models.CharField(verbose_name="Book Content", max_length=100000, unique=False, null=True, blank=True)
     book_ssin = models.IntegerField(verbose_name='Book SSIN', unique=False, blank=False, null=False, default="-1")
 
-    default_time_now = datetime.datetime.now
+    default_time_now = timezone.now
+
 
     book_id = models.CharField(verbose_name='Book Id', unique=True, max_length=50, null=False, blank=False)    
     create_date = models.DateTimeField(verbose_name='create_date', null=False, blank=False, default=default_time_now)

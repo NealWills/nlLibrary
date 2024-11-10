@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from books import models
-import datetime
+from django.utils import timezone
 import uuid
 
 # Create your views here.
@@ -62,7 +62,7 @@ def book_add(request):
     
 
     default_book_id = str(uuid.uuid4()).replace('-', '') 
-    default_time_now = datetime.datetime.now()
+    default_time_now = timezone.now()
 
     dbBook = models.Books(
         book_name=book_name,
@@ -100,7 +100,7 @@ def book_delete(request):
             if bookItem.book_id == '-1':
                 bookItem.book_id = str(uuid.uuid4()).replace('-', '')
             bookItem.is_delete = 1
-            bookItem.delete_date = datetime.datetime.now()
+            bookItem.delete_date = timezone.now()
             bookItem.save()
             return JsonResponse(RequestError.Success.successMapToDic(data=bookItem.transToDic())) 
 
@@ -185,6 +185,7 @@ def book_update(request):
         return JsonResponse(RequestError.BookUpdateNothingChange.failureMapToDic())
     else:
         bookItem.save()
+        bookItem.update_date = timezone.now()
         return JsonResponse(RequestError.Success.successMapToDic(data=bookItem.transToDic()))
 
 
