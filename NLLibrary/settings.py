@@ -127,7 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_TRUSTED_ORIGINS = ['https://coderneal.site', 'https://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://api.coderneal.site', 'https://127.0.0.1']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
